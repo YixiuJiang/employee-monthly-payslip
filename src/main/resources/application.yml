@@ -1,0 +1,24 @@
+spring:
+  application.name: Payslip
+
+inputCSVFile: /input.csv
+outputCSVFile: output.csv
+
+
+taxrate:
+  rates:
+    - taxableIncomeStart: 0
+      taxableIncomeEnd: 18200
+      rate: 0
+    - taxableIncomeStart: 18201
+      taxableIncomeEnd: 37000
+      rate: 0.19
+    - taxableIncomeStart: 37001
+      taxableIncomeEnd: 80000
+      rate: 0.325
+    - taxableIncomeStart: 80001
+      taxableIncomeEnd: 180000
+      rate: 0.37
+    - taxableIncomeStart: 180001
+      taxableIncomeEnd: -1
+      rate: 0.45
