@@ -22,6 +22,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
 
 group 'com.myob.payslip'
 version '1.0-SNAPSHOT'
@@ -56,4 +57,12 @@ jar {
 bootRun {
     // support passing -Dsystem.property=value to bootRun task
     systemProperties = System.properties
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
 }

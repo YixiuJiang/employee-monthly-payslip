@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import org.apache.commons.csv.CSVRecord;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import com.myob.payslip.models.Employee;
@@ -15,8 +13,8 @@ public class CsvRecordToEmployeeConvertor implements Converter<CSVRecord, Employ
 
   private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
 
-  private static final Logger LOGGER =
-      LoggerFactory.getLogger(CsvRecordToEmployeeConvertor.class);
+//  private static final Logger LOGGER =
+//      LoggerFactory.getLogger(CsvRecordToEmployeeConvertor.class);
 
   @Override
   public Employee convert(CSVRecord csvRecord) {
@@ -28,11 +26,12 @@ public class CsvRecordToEmployeeConvertor implements Converter<CSVRecord, Employ
       employee.setSuperRate(getSuperRateFromSuperRatePercentage(csvRecord.get(3)));
       employee.setPaymentPeriod(csvRecord.get(4));
       setEmployeePaymentStartDateAndPaymentEndDate(csvRecord.get(4), employee);
-      if (employee.getPaymentStartDate().getDayOfMonth()!=1){
+      if (employee.getPaymentStartDate().getDayOfMonth() != 1) {
 
       }
     } catch (Exception e) {
-      LOGGER.error("can't parse CSV record {} to employee.", csvRecord.toString(), e);
+      throw new RuntimeException("can't parse CSV record " + csvRecord.toString() + " to employee.",
+          e);
     }
     return employee;
   }

@@ -24,6 +24,7 @@ Linux/Mac:
 
 ## Test
 1. Simply run `./gradlew test` 
+2. To check test coverage, run `./gradlew test jacocoTestReport`
 
 ##Configuration
 1. Tax rate and input CSV file is configurable here: `src/main/resource/application.yml
