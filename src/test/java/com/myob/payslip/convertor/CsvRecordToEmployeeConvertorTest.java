@@ -11,9 +11,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.util.ReflectionTestUtils;
 import com.myob.payslip.models.Employee;
 
 public class CsvRecordToEmployeeConvertorTest {
@@ -56,6 +54,21 @@ public class CsvRecordToEmployeeConvertorTest {
     Assert.assertEquals(employee.getPaymentStartDate().getMonthValue(), 3);
     Assert.assertEquals(employee.getPaymentEndDate().getDayOfMonth(), 31);
     Assert.assertEquals(employee.getPaymentEndDate().getMonthValue(), 3);
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void testConvertException() throws Exception {
+    String firstName = "David";
+    StringJoiner joiner = new StringJoiner(",");
+    joiner.add(firstName);
+    String csvLine = joiner.toString();
+    CSVFormat csvFormat = CSVFormat.DEFAULT;
+
+    CSVParser csvParser = new CSVParser(new BufferedReader(new StringReader(csvLine)), csvFormat);
+
+    List<CSVRecord> csvRecordList = csvParser.getRecords();
+    csvRecord = csvRecordList.get(0);
+    subject.convert(csvRecord);
   }
 
 }

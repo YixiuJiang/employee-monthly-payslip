@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -14,10 +13,10 @@ import org.slf4j.LoggerFactory;
 
 public class CSVReader {
 
-  private static final Logger LOGGER =  LoggerFactory.getLogger(CSVReader.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(CSVReader.class);
 
   public static List<CSVRecord> readCsvRecord(File csvFile) {
-    List<CSVRecord> csvRecords = new ArrayList();
+    List<CSVRecord> csvRecords;
     Reader fileReader = null;
     CSVParser csvFileParser = null;
     CSVFormat csvFileFormat = CSVFormat.DEFAULT;
@@ -26,9 +25,8 @@ public class CSVReader {
       fileReader = new FileReader(csvFile);
       csvFileParser = new CSVParser(fileReader, csvFileFormat);
       csvRecords = csvFileParser.getRecords();
-
-    } catch (Exception e) {
-      LOGGER.error("Error in CsvFileReader!",e);
+    } catch (IOException e) {
+      throw new RuntimeException("Error in CsvFileReader!", e);
     } finally {
       try {
         fileReader.close();

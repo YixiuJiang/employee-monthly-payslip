@@ -34,7 +34,7 @@ public class CSVWriter {
       }
       LOGGER.info("CSV file generated here ", file.getAbsolutePath());
     } catch (Exception e) {
-      LOGGER.error("Error in CsvFileWriter!" + e);
+      throw new RuntimeException("Error in CsvFileWriter!" + e);
     } finally {
       try {
         fileWriter.flush();

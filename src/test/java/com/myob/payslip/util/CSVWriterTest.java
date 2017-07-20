@@ -21,5 +21,4 @@ public class CSVWriterTest {
     CSVWriter.writeCsvFile(tempFile, Arrays.asList(PayslipBuilder.build()));
     tempFile.delete();
   }
-
 }

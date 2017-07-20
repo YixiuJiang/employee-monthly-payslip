@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.test.web.client.ExpectedCount;
 
 public class CSVReaderTest {
 
@@ -17,5 +18,4 @@ public class CSVReaderTest {
     List<CSVRecord> csvRecordList = CSVReader.readCsvRecord(csvFile);
     Assert.assertEquals(csvRecordList.size(), 2);
   }
-
 }
