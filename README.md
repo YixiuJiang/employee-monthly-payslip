@@ -23,7 +23,7 @@ Linux/Mac:
 4. By default it will pickup csv here `src/main/resource/input.csv` and write output CSV into the folder where you run this app.
 
 ## Test
-1. Simply run `./gradlew test`
+1. Simply run `./gradlew test` 
 
 ##Configuration
 1. Tax rate and input CSV file is configurable here: `src/main/resource/application.yml
