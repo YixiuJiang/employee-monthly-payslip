@@ -1,1 +1,5 @@
 language: java
+script: 
+- ./gradlew test jacocoTestReport
+- ./gradlew check
+- ./gradlew assemble
