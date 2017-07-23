@@ -26,6 +26,9 @@ Linux/Mac:
 1. Simply run `./gradlew test` 
 2. To check test coverage, run `./gradlew test jacocoTestReport`
 
+##Integration test
+1. `./gradlew clean build -x integrationTest`
+
 ##Configuration
 1. Tax rate and input CSV file is configurable here: `src/main/resource/application.yml
 2. You can specify your input csv and out put csv by using `./gradlew bootRun -DinputCSVFile=/youroutputcsvfilepath -DoutputCSVFile=/youroutputcsvfilepath`
