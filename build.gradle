@@ -40,6 +40,22 @@ repositories {
     maven { url 'https://repo.spring.io/libs-snapshot' }
 }
 
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile("org.springframework.boot:spring-boot-starter")
@@ -47,13 +63,19 @@ dependencies {
     compile group: 'commons-logging', name: 'commons-logging', version: '1.1.2'
     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.4'
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    integrationTestCompile 'org.assertj:assertj-core:3.0.0'
+}
 
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
 }
 
 jar {
     baseName = 'com-myob-codeexercise-payslip'
     version = "${version}"
 }
+
 bootRun {
     // support passing -Dsystem.property=value to bootRun task
     systemProperties = System.properties
